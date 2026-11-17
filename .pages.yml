@@ -1,0 +1,52 @@
+media:
+  - name: project_images
+    label: Project images
+    input: public/images/projects
+    output: /images/projects
+    extensions: [png, jpg, jpeg, webp, gif, svg]
+    rename: safe
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    filename: "{fields.slug}.md"
+    view:
+      primary: name
+      fields: [name, category, status, draft]
+      sort: [name]
+    fields:
+      - name: name
+        label: Project name
+        type: string
+        required: true
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      - name: category
+        label: Category
+        type: string
+      - name: status
+        label: Status
+        type: string
+      - name: description
+        label: Summary
+        type: text
+      - name: image
+        label: Project image
+        type: image
+        options:
+          media: project_images
+          path: public/images/projects
+          rename: safe
+      - name: imageAlt
+        label: Image description
+        type: string
+      - name: url
+        label: Project link
+        type: string
+      - name: draft
+        label: Draft
+        type: boolean
